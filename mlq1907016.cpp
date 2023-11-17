@@ -2,7 +2,6 @@
     
     Bismillahir Rahmanir Rahim. 
     Every praise goes to ALLAH for our wellbeing.
-    She is who she is and all of my codes are dedicated to HER Majesty.
     Code : Kazi Fahim Tahmid
     Judge: Codeforces
     Date : 2023-10-18 05:31
@@ -134,9 +133,35 @@ void solve() {
 
         }
     }
+    cout << "Current time following by processID being executed:" << endl;
+    
     for (int t = 0; t < T; ++t) {
         cout << t << " " << output[t] + 1 << endl;
     }
+
+    // Throughput and CPU Utilization Calculation
+
+    int utiliza_counter=0 ,time_left=0;
+    
+    for(int t = 0; t < T ; ++t)
+        if(output[t]!=-1) utiliza_counter++;
+    for(int t = T-1; t >= 0 ; --t){
+        if(output[t]==-1) time_left++;
+        else break;
+    }
+    
+    int time_taken = T-time_left;
+    
+    cout << endl;
+    double cpu_utilization = utiliza_counter*1.00/time_taken*100.00;
+    double throughput = processNum * 1.00 / time_taken;
+    // bug(utiliza_counter,time_left,time_taken);
+    bug(throughput,cpu_utilization);
+
+    // Throughput and CPU Utilization Calculation Done
+
+    //Turn Around Time , Waiting Time and Response Time Calculation
+
     for (int t = T-1; t >= 0; --t) {
         if (P[output[t]].tat == -1) {
             P[output[t]].tat = (t+1) - P[output[t]].at;
@@ -153,6 +178,9 @@ void solve() {
         cout << i+1 << "\t\t" << P[i].tat << "\t\t\t\t" << P[i].wt << "\t\t\t" << P[i].rt << endl;
     }
 
+    //Turn Around Time , Waiting Time and Response Time Calculation Done
+
+    // End of Program
 	// int n, m;
 	// cin >> n >> m;
 	// bug(n, m);
